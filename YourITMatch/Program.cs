@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using YourITMatch.Areas.Identity.Data;
 using YourITMatch.Data;
@@ -12,11 +12,9 @@ namespace YourITMatch
             var builder = WebApplication.CreateBuilder(args);
             var connectionString = builder.Configuration.GetConnectionString("YourITMatchContextConnection") ?? throw new InvalidOperationException("Connection string 'YourITMatchContextConnection' not found.");
 
-            builder.Services.AddDbContext<YourITMatchContext>(options =>
-    options.UseSqlite(connectionString));
+            builder.Services.AddDbContext<YourITMatchContext>(options => options.UseSqlite(connectionString));
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
-.AddEntityFrameworkStores<YourITMatchContext>();
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<YourITMatchContext>();
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();

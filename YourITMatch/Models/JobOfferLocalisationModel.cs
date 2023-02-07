@@ -2,13 +2,13 @@
 
 namespace YourITMatch.Models
 {
-    public class CompanyAddressModel
+    public class JobOfferLocalisationModel
     {
         [Required]
         public int ID { get; set; }
 
         [Required]
-        public CompanyModel CompanyID { get; set; }
+        public JobOfferModel JobOfferId { get; set; }
 
         [Required]
         public string PostCode { get; set; }
