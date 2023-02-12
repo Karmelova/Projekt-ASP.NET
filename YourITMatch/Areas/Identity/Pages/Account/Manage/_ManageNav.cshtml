@@ -1,0 +1,13 @@
+﻿@using YourITMatch.Extensions;
+@inject SignInManager<ApplicationUser> SignInManager
+@{
+    var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();
+}
+<ul id="accountSetings" class="nav nav-pills flex-column fw-bold">
+    <li class="nav-item @ManageNavPages.IndexNavClass(ViewContext)"><a class="nav-link text-black " id="profile" asp-page="./Index">Profil użytkownika</a></li>
+    <li class="nav-item @ManageNavPages.EmailNavClass(ViewContext)"><a class="nav-link text-black " id="email" asp-page="./Email">Email</a></li>
+    <li class="nav-item @ManageNavPages.ChangePasswordNavClass(ViewContext)"><a class="nav-link text-black " id="change-password" asp-page="./ChangePassword">Hasło</a></li>
+    <a id="delete" asp-page="DeletePersonalData" class="btn btn-danger m-3 mt-5  col-8">Usuń konto</a>
+</ul>
+
+

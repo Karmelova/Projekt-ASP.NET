@@ -65,7 +65,7 @@ namespace YourITMatch.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Podanie adresu email jest wymagane")]
             [EmailAddress]
             public string Email { get; set; }
 
@@ -73,7 +73,7 @@ namespace YourITMatch.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-            [Required]
+            [Required(ErrorMessage = "Podanie hasła jest wymagane")]
             [DataType(DataType.Password)]
             [Display(Name = "Hasło")]
             public string Password { get; set; }
@@ -130,7 +130,7 @@ namespace YourITMatch.Areas.Identity.Pages.Account
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Nieprawidłowe dane logowania");
                     return Page();
                 }
             }

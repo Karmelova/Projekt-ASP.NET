@@ -34,3 +34,13 @@ body {
     border-bottom: 0.2em solid rgb(206, 255, 26) !important;
     transition: 0.5s;
 }
+
+#accountSetings .nav-item.active {
+    background-color: var(--bs-gray-400);
+}
+
+.vh-75 {
+    height: 75vh;
+}
+
+.

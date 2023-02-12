@@ -8,6 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs" />
+    <Compile Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
+    <Compile Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
+    <Content Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.13" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="6.0.13" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.1" />

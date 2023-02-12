@@ -17,6 +17,14 @@
       "PackagePath": "staticwebassets\\icons\\brand.svg"
     },
     {
+      "Id": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\exclamation-circle.svg",
+      "PackagePath": "staticwebassets\\icons\\exclamation-circle.svg"
+    },
+    {
+      "Id": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\exclamation-diamond-fill.svg",
+      "PackagePath": "staticwebassets\\icons\\exclamation-diamond-fill.svg"
+    },
+    {
       "Id": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\person-circle.svg",
       "PackagePath": "staticwebassets\\icons\\person-circle.svg"
     },

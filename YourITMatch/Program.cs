@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using YourITMatch.Areas.Identity.Data;
 using YourITMatch.Data;
+using Microsoft.AspNetCore.Identity;
 
 namespace YourITMatch
 {

@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "hT7/sV1JNuFv8XtWM3YD3H/GdkeYuzJ3gowP1oHUb9o=",
+  "Hash": "MmEhQQnC4eoGLaT44zZE75fgMvgiTw14GIG2kAbXfxY=",
   "Source": "YourITMatch",
   "BasePath": "_content/YourITMatch",
   "Mode": "Default",
@@ -1120,6 +1120,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icons\\brand.svg"
+    },
+    {
+      "Identity": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\exclamation-circle.svg",
+      "SourceId": "YourITMatch",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\",
+      "BasePath": "_content/YourITMatch",
+      "RelativePath": "icons/exclamation-circle.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icons\\exclamation-circle.svg"
+    },
+    {
+      "Identity": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\exclamation-diamond-fill.svg",
+      "SourceId": "YourITMatch",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\",
+      "BasePath": "_content/YourITMatch",
+      "RelativePath": "icons/exclamation-diamond-fill.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icons\\exclamation-diamond-fill.svg"
     },
     {
       "Identity": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\person-circle.svg",

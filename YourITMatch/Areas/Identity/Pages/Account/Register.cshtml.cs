@@ -88,7 +88,7 @@ namespace YourITMatch.Areas.Identity.Pages.Account
 
             [Required(ErrorMessage = "Pole hasło jest wymagane")]
             [StringLength(100, ErrorMessage = "Hasło powinno zawierać conajmniej 6 znaków", MinimumLength = 6)]
-            [DataType(DataType.Password)]
+            [DataType(DataType.Password, ErrorMessage = "Hasło powinno zawierać co najmniej 1 wielką literę, oraz co najmniej jedną cyfrę.")]
             [Display(Name = "Hasło")]
             public string Password { get; set; }
 
@@ -147,7 +147,10 @@ namespace YourITMatch.Areas.Identity.Pages.Account
                 }
                 foreach (var error in result.Errors)
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    if (error.Description.ToString() == "Passwords must have at least one non alphanumeric character.") error.Description = "Hasło musi zawierać znak specjalny.";
+                    if (error.Description.ToString() == "Passwords must have at least one digit ('0'-'9').") error.Description = "Hasło musi zawierać cyfrę.";
+                    if (error.Description.ToString() == "Passwords must have at least one uppercase ('A'-'Z').") error.Description = "Hasło musi zawierać wielką literę";
+                    else ModelState.AddModelError(string.Empty, error.Description);
                 }
             }
 

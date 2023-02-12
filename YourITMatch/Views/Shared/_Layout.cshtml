@@ -14,7 +14,7 @@
         <nav id="navbar" class="navbar navbar-dark navbar-expand-md py-3 bg-secondary bg-opacity-75 ">
             <div class="container">
                 <a class="navbar-brand d-flex align-items-center" asp-area="" asp-controller="" asp-action="">
-                    <span class="bs-icon-sm d-flex justify-content-center align-items-center me-2 bs-icon">
+                    <span class="bs-icon-sm d-flex me-2 bs-icon">
                         <object data="~/icons/brand.svg" width="40em" height="40em"></object>
                     </span>
                     <span>Your IT Match</span>
@@ -24,10 +24,10 @@
                     <span class="navbar-toggler-icon"></span></button>
                 <div id="navcol-1" class="collapse navbar-collapse">
                     <ul class="navbar-nav mx-auto">
-                        <li class="nav-item  @Html.IsActive("Home", "Index")">
+                        <li class="nav-item @Html.IsActive("Home", "Index")">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Index">Oferty</a>
                         </li>
-                        <li class="nav-item  @Html.IsActive("Home", "Privacy")">
+                        <li class="nav-item rounded-pil @Html.IsActive("Home", "Privacy")">
                             <a class="nav-link text-white" asp-area="" asp-controller="Home" asp-action="Privacy">Profile firm</a>
                         </li>
                     </ul>
@@ -37,7 +37,7 @@
         </nav>
     </header>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main id="main" role="main" class="card mt-4 pb-3">
             @RenderBody()
         </main>
     </div>
