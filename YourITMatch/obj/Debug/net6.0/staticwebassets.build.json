@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "HOXisVj1CK73Uu6NsTimSpS5OI+5P9aEPWS4ZmWG1oc=",
+  "Hash": "hT7/sV1JNuFv8XtWM3YD3H/GdkeYuzJ3gowP1oHUb9o=",
   "Source": "YourITMatch",
   "BasePath": "_content/YourITMatch",
   "Mode": "Default",
@@ -1120,6 +1120,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\icons\\brand.svg"
+    },
+    {
+      "Identity": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\icons\\person-circle.svg",
+      "SourceId": "YourITMatch",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\",
+      "BasePath": "_content/YourITMatch",
+      "RelativePath": "icons/person-circle.svg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\icons\\person-circle.svg"
     },
     {
       "Identity": "C:\\Users\\kamil\\source\\repos\\Projekt-ASP.NET\\YourITMatch\\wwwroot\\js\\site.js",

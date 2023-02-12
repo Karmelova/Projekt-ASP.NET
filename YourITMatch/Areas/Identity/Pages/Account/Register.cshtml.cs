@@ -71,30 +71,30 @@ namespace YourITMatch.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [Display(Name = "FirstName")]
-            [StringLength(255, ErrorMessage = "max 255.")]
+            [Required(ErrorMessage = "Pole imię jest wymagane")]
+            [Display(Name = "Imię")]
+            [StringLength(100, ErrorMessage = "Imię nie może mieć więcej niż 100 znaków")]
             public string FirstName { get; set; }
 
-            [Required]
-            [Display(Name = "LastName")]
-            [StringLength(255, ErrorMessage = "max 255.")]
+            [Required(ErrorMessage = "Pole nazwisko jest wymagane")]
+            [Display(Name = "Nazwisko")]
+            [StringLength(100, ErrorMessage = "Nazwisko nie może mieć więcej niż 100 znaków")]
             public string LastName { get; set; }
 
-            [Required]
-            [EmailAddress]
+            [Required(ErrorMessage = "Pole email jest wymagane")]
+            [EmailAddress(ErrorMessage = "Wprowadzony tekst nie jest adresem email")]
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            [Required]
-            [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+            [Required(ErrorMessage = "Pole hasło jest wymagane")]
+            [StringLength(100, ErrorMessage = "Hasło powinno zawierać conajmniej 6 znaków", MinimumLength = 6)]
             [DataType(DataType.Password)]
-            [Display(Name = "Password")]
+            [Display(Name = "Hasło")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Confirm password")]
-            [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+            [Display(Name = "Powtórz hasło")]
+            [Compare("Password", ErrorMessage = "Wprowadzone hasła nie są takie same")]
             public string ConfirmPassword { get; set; }
         }
 

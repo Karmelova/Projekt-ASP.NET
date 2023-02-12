@@ -1,18 +1,36 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+    margin-bottom: 60px;
+}
+
+* {
+    --bs-myprimary-rgb: 30, 40, 72 !important;
+    --bs-mysecondary-rgb: 12, 22, 49 !important;
+}
+
+.bg-primary {
+    background-color: rgba(var(--bs-myprimary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-secondary {
+    background-color: rgba(var(--bs-mysecondary-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.active {
+    border-bottom: 0.2em solid rgb(206, 255, 26) !important;
+    transition: 0.5s;
 }

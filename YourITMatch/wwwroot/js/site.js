@@ -1,4 +1,11 @@
-﻿// Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿const navbar = document.getElementById('navbar');
+const footer = document.getElementById('footer');
 
-// Write your JavaScript code.
+navbar.addEventListener('mouseover', function () {
+    this.classList.remove('bg-opacity-75');
+    this.classList.add('bg-opacity-100');
+});
+navbar.addEventListener('mouseleave', function () {
+    this.classList.remove('bg-opacity-100');
+    this.classList.add('bg-opacity-75');
+});

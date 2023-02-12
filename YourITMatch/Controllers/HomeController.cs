@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Diagnostics;
 using YourITMatch.Models;
 
@@ -15,11 +16,13 @@ namespace YourITMatch.Controllers
 
         public IActionResult Index()
         {
+            ViewData["ActiveNavLink"] = "Home";
             return View();
         }
 
         public IActionResult Privacy()
         {
+            ViewData["ActiveNavLink"] = "Privacy";
             return View();
         }
 
