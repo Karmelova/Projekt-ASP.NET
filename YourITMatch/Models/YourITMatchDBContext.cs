@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using YourITMatch.Models;
 
 namespace YourITMatch.Models
 {
@@ -6,8 +7,11 @@ namespace YourITMatch.Models
     {
         public DbSet<CompanyModel> Company { get; set; }
         public DbSet<CompanyAddressModel> CompanyAddress { get; set; }
+        public DbSet<JobOfferModel> JobOffer { get; set; }
+        public DbSet<JobOfferLocalisationModel> JobOfferLocalisation { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite(@"Data Source=.\Data\YourITMatchDB.db");
+        public YourITMatchDBContext(DbContextOptions<YourITMatchDBContext> options) : base(options)
+        {
+        }
     }
 }

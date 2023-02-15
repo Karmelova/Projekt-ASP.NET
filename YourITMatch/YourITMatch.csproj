@@ -11,12 +11,16 @@
     <Compile Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml.cs" />
     <Compile Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml.cs" />
+    <Compile Remove="Views\JobOffer\Index1.cshtml.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+    <Content Remove="Views\JobOffer\Index1.cshtml" />
+    <Content Remove="Views\JobOffer\JobOffer.cshtml" />
+    <Content Remove="Views\JobOffer\Wynik.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

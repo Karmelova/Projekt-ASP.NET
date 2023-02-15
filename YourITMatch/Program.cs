@@ -1,8 +1,9 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using YourITMatch.Areas.Identity.Data;
 using YourITMatch.Data;
 using Microsoft.AspNetCore.Identity;
+using System.Configuration;
+using YourITMatch.Models;
 
 namespace YourITMatch
 {
@@ -11,9 +12,10 @@ namespace YourITMatch
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
-            var connectionString = builder.Configuration.GetConnectionString("YourITMatchContextConnection") ?? throw new InvalidOperationException("Connection string 'YourITMatchContextConnection' not found.");
+            var connectionString = (@"Data Source=.\Data\YourITMatchDB.db") ?? throw new InvalidOperationException("Connection string 'YourITMatchContextConnection' not found.");
 
             builder.Services.AddDbContext<YourITMatchContext>(options => options.UseSqlite(connectionString));
+            builder.Services.AddDbContext<YourITMatchDBContext>(options => options.UseSqlite(connectionString));
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<YourITMatchContext>();
 
@@ -50,7 +52,7 @@ namespace YourITMatch
 
             app.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller=JobOffer}/{action=Index}/{id?}");
             app.MapRazorPages();
             app.Run();
         }

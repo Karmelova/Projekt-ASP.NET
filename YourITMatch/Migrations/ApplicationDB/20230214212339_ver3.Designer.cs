@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YourITMatch.Models;
 
@@ -10,9 +11,11 @@ using YourITMatch.Models;
 namespace YourITMatch.Migrations
 {
     [DbContext(typeof(YourITMatchDBContext))]
-    partial class YourITMatchDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230214212339_ver3")]
+    partial class ver3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -147,6 +150,9 @@ namespace YourITMatch.Migrations
                     b.Property<int>("CompanyIDID")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("TEXT");
 
@@ -171,7 +177,7 @@ namespace YourITMatch.Migrations
 
                     b.HasIndex("CompanyIDID");
 
-                    b.ToTable("JobOffer");
+                    b.ToTable("JobOfferModel");
                 });
 
             modelBuilder.Entity("YourITMatch.Models.CompanyAddressModel", b =>
