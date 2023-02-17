@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using YourITMatch.Areas.Identity.Data;
 using System.Security.Claims;
 using Microsoft.EntityFrameworkCore;
+using System.Text.RegularExpressions;
 
 namespace YourITMatch.Controllers
 {
@@ -64,46 +65,79 @@ namespace YourITMatch.Controllers
             return View(companyModel);
         }
 
-        // GET: HomeController1/Edit/5
-        public ActionResult Edit(int id)
+        //edit company
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var company = await _context.Company.FindAsync(id);
+
+            if (company == null)
+            {
+                return NotFound();
+            }
+
+            return View(company);
         }
 
-        // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Email,NIP,Regon,PostCode,City,Voivodeship,Street,CompanySize,CompanyEstablished,CompanyWebsite")] CompanyModel companyModel)
         {
-            try
+            if (id != companyModel.ID)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(companyModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!CompanyExists(companyModel.ID))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(companyModel);
         }
 
-        // GET: HomeController1/Delete/5
+        private bool CompanyExists(int id)
+        {
+            return _context.Company.Any(e => e.ID == id);
+        }
+
+        //delete company
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
-            try
+            var company = await _context.Company.FindAsync(id);
+
+            if (company == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+
+            _context.Company.Remove(company);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

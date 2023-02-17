@@ -21,9 +21,10 @@ namespace YourITMatch.Controllers
         }
 
         // GET: HomeController1/Create
-        public ActionResult Create()
+        public IActionResult Create(int companyId)
         {
-            return View();
+            var jobOffer = new JobOfferModel { CompanyId = companyId };
+            return View(jobOffer);
         }
 
         // POST: HomeController1/Create

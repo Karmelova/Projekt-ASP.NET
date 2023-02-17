@@ -70,5 +70,7 @@ namespace YourITMatch.Models
         [Url]
         [Display(Name = "Strona internetowa")]
         public string? CompanyWebsite { get; set; }
+
+        public ICollection<JobOfferModel>? JobOffers { get; set; }
     }
 }

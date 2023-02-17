@@ -9,7 +9,7 @@
 <section class="row">
     @foreach (var CompanyModel in Model)
     {
-        <div class="row col-12 col-md-6 p-5 align-content-start">
+        <div class="row col-12 col-md-6 p-5 mb-5 align-content-start">
             <a class="text-decoration-none text-black" asp-action="Details" asp-route-id="@CompanyModel.ID">
                 <div class="col-12">
                     <h4 class="mb-2">
@@ -31,9 +31,9 @@
                         @if (userRole.Contains(Roles.Admin.ToString()))
                         {
                             <div class="row col-12" style="max-height:30px;">
-                                <a class="btn btn-primary col-12 col-md-6" asp-action="Edit"
+                                <a class="btn btn-primary col-12 col-md-6 mb-3" asp-action="Edit"
                        asp-route-id="@CompanyModel.ID">Edytuj</a>
-                                <a class="btn btn-danger col-12 col-md-6" asp-action="Delete"
+                                <a class="btn btn-danger col-12 col-md-6 mb-3" asp-action="Delete"
                        asp-route-id="@CompanyModel.ID">Usuń</a>
                             </div>
 

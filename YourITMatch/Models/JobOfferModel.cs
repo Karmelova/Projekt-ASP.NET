@@ -10,7 +10,7 @@ namespace YourITMatch.Models
         public int Id { get; set; }
 
         [Required]
-        public CompanyModel CompanyID { get; set; }
+        public int CompanyId { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -23,9 +23,6 @@ namespace YourITMatch.Models
 
         [Required]
         public decimal SalaryTo { get; set; }
-
-        [Required]
-        public DateTime DateAdded { get; set; }
 
         [Required]
         public _JobCategory JobCategory { get; set; }
