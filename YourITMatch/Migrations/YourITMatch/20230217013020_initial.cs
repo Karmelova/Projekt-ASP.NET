@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace YourITMatch.Migrations.YourITMatch
 {
     /// <inheritdoc />
-    public partial class ver1 : Migration
+    public partial class initial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,8 +30,9 @@ namespace YourITMatch.Migrations.YourITMatch
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "TEXT", nullable: false),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
+                    Discriminator = table.Column<string>(type: "TEXT", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(100)", maxLength: 255, nullable: true),
+                    LastName = table.Column<string>(type: "nvarchar(100)", maxLength: 255, nullable: true),
                     UserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "TEXT", maxLength: 256, nullable: true),

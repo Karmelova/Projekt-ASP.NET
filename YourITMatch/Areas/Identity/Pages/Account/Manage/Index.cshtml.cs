@@ -75,7 +75,6 @@ namespace YourITMatch.Areas.Identity.Pages.Account.Manage
 
         private async Task LoadAsync(ApplicationUser user)
         {
-            var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             FirstName = user.FirstName;
@@ -83,6 +82,8 @@ namespace YourITMatch.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
+                FirstName = FirstName,
+                LastName = LastName,
                 PhoneNumber = phoneNumber
             };
         }
@@ -92,7 +93,7 @@ namespace YourITMatch.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nie można odszukać użytkownika o ID '{_userManager.GetUserId(User)}'.");
             }
 
             await LoadAsync(user);
@@ -104,7 +105,7 @@ namespace YourITMatch.Areas.Identity.Pages.Account.Manage
             var user = await _userManager.GetUserAsync(User);
             if (user == null)
             {
-                return NotFound($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
+                return NotFound($"Nie można odszukać użytkownika o ID '{_userManager.GetUserId(User)}'.");
             }
 
             if (!ModelState.IsValid)
@@ -119,13 +120,35 @@ namespace YourITMatch.Areas.Identity.Pages.Account.Manage
                 var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, Input.PhoneNumber);
                 if (!setPhoneResult.Succeeded)
                 {
-                    StatusMessage = "Unexpected error when trying to set phone number.";
+                    StatusMessage = "Wystąpił nieoczekiwany błąd przy aktualizacji numeru telefonu.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.FirstName != user.FirstName)
+            {
+                user.FirstName = Input.FirstName;
+                var setFirstName = await _userManager.UpdateAsync(user);
+                if (!setFirstName.Succeeded)
+                {
+                    StatusMessage = "Wystąpił nieoczekiwany błąd przy aktualizacji imienia.";
+                    return RedirectToPage();
+                }
+            }
+
+            if (Input.LastName != user.LastName)
+            {
+                user.LastName = Input.LastName;
+                var setLastName = await _userManager.UpdateAsync(user);
+                if (!setLastName.Succeeded)
+                {
+                    StatusMessage = "Wystąpił nieoczekiwany błąd przy aktualizacji nazwiska.";
                     return RedirectToPage();
                 }
             }
 
             await _signInManager.RefreshSignInAsync(user);
-            StatusMessage = "Your profile has been updated";
+            StatusMessage = "Zaktualizowano dane użytkownika.";
             return RedirectToPage();
         }
     }

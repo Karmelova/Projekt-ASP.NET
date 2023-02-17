@@ -2,7 +2,6 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YourITMatch.Models;
 
@@ -11,14 +10,72 @@ using YourITMatch.Models;
 namespace YourITMatch.Migrations
 {
     [DbContext(typeof(YourITMatchDBContext))]
-    [Migration("20230214212339_ver3")]
-    partial class ver3
+    partial class YourITMatchDBContextModelSnapshot : ModelSnapshot
     {
-        /// <inheritdoc />
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
+
+            modelBuilder.Entity("YourITMatch.Areas.Identity.Data.ApplicationUser", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("AccessFailedCount")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Email")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("EmailConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<bool>("LockoutEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTimeOffset?>("LockoutEnd")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedEmail")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("NormalizedUserName")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PasswordHash")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PhoneNumber")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("PhoneNumberConfirmed")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("SecurityStamp")
+                        .HasColumnType("TEXT");
+
+                    b.Property<bool>("TwoFactorEnabled")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserName")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ApplicationUser");
+                });
 
             modelBuilder.Entity("YourITMatch.Models.CompanyAddressModel", b =>
                 {
@@ -62,18 +119,16 @@ namespace YourITMatch.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<DateOnly>("CompanyEstablished")
+                    b.Property<DateOnly?>("CompanyEstablished")
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("CompanySize")
+                    b.Property<int?>("CompanySize")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("CompanyWebsite")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Email")
@@ -150,9 +205,6 @@ namespace YourITMatch.Migrations
                     b.Property<int>("CompanyIDID")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("DateAdded")
                         .HasColumnType("TEXT");
 
@@ -160,13 +212,16 @@ namespace YourITMatch.Migrations
                         .IsRequired()
                         .HasColumnType("TEXT");
 
-                    b.Property<int>("JobCategoryId")
+                    b.Property<int>("JobCategory")
                         .HasColumnType("INTEGER");
 
                     b.Property<bool>("Remote")
                         .HasColumnType("INTEGER");
 
-                    b.Property<decimal>("Salary")
+                    b.Property<decimal>("SalaryFrom")
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("SalaryTo")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Title")
@@ -177,7 +232,29 @@ namespace YourITMatch.Migrations
 
                     b.HasIndex("CompanyIDID");
 
-                    b.ToTable("JobOfferModel");
+                    b.ToTable("JobOffer");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.UserCompany", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("UserCompany");
                 });
 
             modelBuilder.Entity("YourITMatch.Models.CompanyAddressModel", b =>
@@ -211,6 +288,30 @@ namespace YourITMatch.Migrations
                         .IsRequired();
 
                     b.Navigation("CompanyID");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.UserCompany", b =>
+                {
+                    b.HasOne("YourITMatch.Models.CompanyModel", "Company")
+                        .WithMany("UserCompanies")
+                        .HasForeignKey("CompanyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("YourITMatch.Areas.Identity.Data.ApplicationUser", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Company");
+
+                    b.Navigation("User");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.CompanyModel", b =>
+                {
+                    b.Navigation("UserCompanies");
                 });
 #pragma warning restore 612, 618
         }

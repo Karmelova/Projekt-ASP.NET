@@ -5,6 +5,7 @@ namespace YourITMatch.Models
     public class CompanyAddressModel
     {
         [Required]
+        [Key]
         public int ID { get; set; }
 
         [Required]

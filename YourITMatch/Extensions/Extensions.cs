@@ -35,4 +35,30 @@ namespace YourITMatch.Extensions
             return returnActive ? "active" : "";
         }
     }
+
+    public static class EnumExtensions
+    {
+        public static List<SelectListItem> ToSelectList<TEnum>(this TEnum enumObj)
+            where TEnum : struct, Enum
+        {
+            return Enum.GetValues(typeof(TEnum))
+                .Cast<TEnum>()
+                .Select(e => new SelectListItem
+                {
+                    Text = e.ToString(),
+                    Value = e.ToString(),
+                    Selected = e.Equals(enumObj)
+                })
+                .ToList();
+        }
+
+        public static SelectList ToSelectList<TEnum>(this TEnum enumObj, string selectedItem)
+    where TEnum : struct, Enum
+        {
+            var values = from TEnum e in Enum.GetValues(typeof(TEnum))
+                         select new { Id = e, Name = e.ToString() };
+
+            return new SelectList(values, "Id", "Name", selectedItem);
+        }
+    }
 }

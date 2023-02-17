@@ -4,13 +4,16 @@ namespace YourITMatch.Models
 {
     public class CompanyModel
     {
+        public ICollection<UserCompany>? UserCompanies { get; set; }
+
         [Required]
+        [Key]
         public int ID { get; set; }
 
         [Required]
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        public string? Description { get; set; }
 
         [Required]
         [EmailAddress]
@@ -42,12 +45,11 @@ namespace YourITMatch.Models
             Large
         }
 
-        [Required]
-        public _CompanySize CompanySize { get; set; }
+        public _CompanySize? CompanySize { get; set; }
 
-        public DateOnly CompanyEstablished { get; set; }
+        public DateOnly? CompanyEstablished { get; set; }
 
         [Url]
-        public string CompanyWebsite { get; set; }
+        public string? CompanyWebsite { get; set; }
     }
 }

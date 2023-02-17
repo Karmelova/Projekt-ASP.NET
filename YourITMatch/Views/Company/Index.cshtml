@@ -1,0 +1,15 @@
+﻿@model List<CompanyModel>
+
+<table>
+    <thead>
+    </thead>
+    <tbody>
+        @foreach (var CompanyModel in Model)
+        {
+            <tr>
+                <td>@CompanyModel.Name</td>
+                <td>@CompanyModel.NIP</td>
+            </tr>
+        }
+    </tbody>
+</table>
