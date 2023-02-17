@@ -95,10 +95,10 @@
     <a asp-action="Edit" asp-route-id="@Model?.ID">Edit</a> |
     <a asp-action="Index">Back to List</a>
 </div>
-@*@if (Model.JobOffers.Any())
+@*@if (model.JobOffers.Any())
 {
     <ul>
-        @foreach (var jobOffer in Model.JobOffers)
+        @foreach (var jobOffer in model.JobOffers)
         {
             <li>@jobOffer.Title</li>
         }
