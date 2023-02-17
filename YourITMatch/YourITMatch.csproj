@@ -18,6 +18,7 @@
     <Content Remove="Areas\Identity\Pages\Account\ForgotPassword.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\ForgotPasswordConfirmation.cshtml" />
     <Content Remove="Areas\Identity\Pages\Account\Manage\PersonalData.cshtml" />
+    <Content Remove="Views\Company\Details.cshtml" />
     <Content Remove="Views\JobOffer\Index1.cshtml" />
     <Content Remove="Views\JobOffer\JobOffer.cshtml" />
     <Content Remove="Views\JobOffer\Wynik.cshtml" />
@@ -38,7 +39,7 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.11" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="6.0.12" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
   </ItemGroup>
 

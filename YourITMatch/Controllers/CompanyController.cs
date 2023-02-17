@@ -18,6 +18,15 @@ namespace YourITMatch.Controllers
             _userManager = userManager;
         }
 
+        //companies added by user
+        [HttpGet]
+        public async Task<IActionResult> CompaniesAddedByUser(string userName)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            var companies = _context.Company.Where(c => c.AddedBy == currentUser.UserName).ToList();
+            return View(companies);
+        }
+
         // GET: HomeController1
         public ActionResult Index()
         {
