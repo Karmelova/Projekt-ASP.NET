@@ -14,6 +14,7 @@ namespace YourITMatch.Models
 
         public YourITMatchDBContext(DbContextOptions<YourITMatchDBContext> options) : base(options)
         {
+            Database.EnsureCreated();
         }
     }
 }

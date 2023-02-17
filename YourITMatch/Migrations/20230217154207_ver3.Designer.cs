@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YourITMatch.Models;
 
@@ -10,9 +11,11 @@ using YourITMatch.Models;
 namespace YourITMatch.Migrations
 {
     [DbContext(typeof(YourITMatchDBContext))]
-    partial class YourITMatchDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230217154207_ver3")]
+    partial class ver3
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
@@ -54,9 +57,6 @@ namespace YourITMatch.Migrations
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
-
-                    b.Property<string>("AddedBy")
-                        .HasColumnType("TEXT");
 
                     b.Property<string>("City")
                         .IsRequired()
@@ -178,6 +178,29 @@ namespace YourITMatch.Migrations
                     b.ToTable("JobOffer");
                 });
 
+            modelBuilder.Entity("YourITMatch.Models.UserCompany", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CompanyModelID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("CompanyModelID");
+
+                    b.ToTable("UserCompany");
+                });
+
             modelBuilder.Entity("YourITMatch.Models.CompanyAddressModel", b =>
                 {
                     b.HasOne("YourITMatch.Models.CompanyModel", "CompanyID")
@@ -209,6 +232,18 @@ namespace YourITMatch.Migrations
                         .IsRequired();
 
                     b.Navigation("CompanyID");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.UserCompany", b =>
+                {
+                    b.HasOne("YourITMatch.Models.CompanyModel", null)
+                        .WithMany("UserCompanies")
+                        .HasForeignKey("CompanyModelID");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.CompanyModel", b =>
+                {
+                    b.Navigation("UserCompanies");
                 });
 #pragma warning restore 612, 618
         }
