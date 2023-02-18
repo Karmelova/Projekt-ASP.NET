@@ -63,7 +63,7 @@ namespace YourITMatch.Controllers
                 jobOfferModel.AddedBy = currentUser.UserName;
                 _context.Add(jobOfferModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(JobOffersAddedByUser));
             }
             return View(jobOfferModel);
         }
@@ -82,7 +82,7 @@ namespace YourITMatch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyId,Company,Title,Description,SalaryFrom,SalaryTo,JobCategoryId,Remote")] JobOfferModel jobOfferModel)
+        public async Task<IActionResult> Edit(int id, [Bind("AddedBy,Id,CompanyId,Company,Title,Description,SalaryFrom,SalaryTo,Remote")] JobOfferModel jobOfferModel)
         {
             if (id != jobOfferModel.Id)
             {
@@ -108,7 +108,7 @@ namespace YourITMatch.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(JobOffersAddedByUser));
             }
 
             return View(jobOfferModel);
@@ -119,9 +119,16 @@ namespace YourITMatch.Controllers
             return _context.JobOffer.Any(e => e.Id == id);
         }
 
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var jobOffer = await _context.JobOffer.FindAsync(id);
+
+            if (jobOffer == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobOffer);
         }
 
         [HttpPost]
@@ -138,7 +145,7 @@ namespace YourITMatch.Controllers
             _context.JobOffer.Remove(jobOffer);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(JobOffersAddedByUser));
         }
     }
 }

@@ -1,5 +1,5 @@
-﻿@using Microsoft.AspNetCore.Identity
-@using YourITMatch.Areas.Identity.Data
+﻿@using Microsoft.AspNetCore.Identity;
+@using YourITMatch.Areas.Identity.Data;
 @using YourITMatch.Extensions;
 
 @inject SignInManager<ApplicationUser> SignInManager
@@ -9,7 +9,7 @@
 <section class="row">
     @foreach (var jobOffer in Model)
     {
-        <div class="row col-12 col-md-6 p-5 mb-5 align-content-start">
+        <div class="card row col-12 col-md-6 p-5 mb-5 align-content-start">
             <a class="text-decoration-none text-black" asp-action="Details" asp-route-id="@jobOffer.Id">
                 <div class="col-12">
                     <h4 class="mb-2">
@@ -20,8 +20,10 @@
                         @jobOffer.Title
                     </h4>
                     <div class="mt-4 mb-4">
-                        Wynagrodzenie: @jobOffer.SalaryFrom - @jobOffer.SalaryTo brutto miesięcznie
+                        Wynagrodzenie: @jobOffer.SalaryFrom - @jobOffer.SalaryTo brutto miesięcznie<br />
+                        Praca zdalna: @((jobOffer.Remote) ? "tak" : "nie")<br/>
 
+                        
                     </div>
                     @if (SignInManager.IsSignedIn(User))
                     {
@@ -29,7 +31,7 @@
                         var userRole = await UserManager.GetRolesAsync(user);
                         @if (userRole.Contains(Roles.Admin.ToString()))
                         {
-                            <div class="row col-12" style="max-height:30px;">
+                            <div class="row col-12 mb-5" style="max-height:30px;">
                                 <a class="btn btn-primary col-12 col-md-6 mb-3" asp-action="Edit"
                        asp-route-id="@jobOffer.Id">Edytuj</a>
                                 <a class="btn btn-danger col-12 col-md-6 mb-3" asp-action="Delete"

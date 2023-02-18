@@ -12,31 +12,34 @@
 }
 else
 {
-<section class="row">
-    @foreach (var jobOffer in Model)
-    {
-        <div class=" row col-12 col-md-6 p-5 mb-5">
+    <section class="row">
+        @foreach (var jobOffer in Model)
+        {
+            <div class="card row col-12 col-md-6 p-5 mb-5 align-content-start">
+                <a class="text-decoration-none text-black" asp-action="Details" asp-route-id="@jobOffer.Id">
+                    <div class="col-12">
+                        <h4 class="mb-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
+                         class="bi bi-briefcase" viewBox="0 0 16 16">
+                                <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z" />
+                            </svg>
+                            @jobOffer.Title
+                        </h4>
+                        <div class="mt-4 mb-4 overflow-hidden" style="max-height: 100px;">
+                            @jobOffer.Description
 
-            <div class="col-12">
-                <h4 class="mb-2">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor"
-                     class="bi bi-briefcase" viewBox="0 0 16 16">
-                            <path d="M6.5 1A1.5 1.5 0 0 0 5 2.5V3H1.5A1.5 1.5 0 0 0 0 4.5v8A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-8A1.5 1.5 0 0 0 14.5 3H11v-.5A1.5 1.5 0 0 0 9.5 1h-3zm0 1h3a.5.5 0 0 1 .5.5V3H6v-.5a.5.5 0 0 1 .5-.5zm1.886 6.914L15 7.151V12.5a.5.5 0 0 1-.5.5h-13a.5.5 0 0 1-.5-.5V7.15l6.614 1.764a1.5 1.5 0 0 0 .772 0zM1.5 4h13a.5.5 0 0 1 .5.5v1.616L8.129 7.948a.5.5 0 0 1-.258 0L1 6.116V4.5a.5.5 0 0 1 .5-.5z" />
-                        </svg>
-                    @jobOffer.Title
-                </h4>
-                <div class="mt-4 mb-4">
-                    @jobOffer.Description
+                        </div>
 
-                </div>
+                    </div>
+                    <div class="row col-12 mb-5" style="max-height:30px;">
+                        <a class="btn btn-primary col-12 col-md-6 mb-3" asp-action="Edit"
+                   asp-route-id="@jobOffer.Id">Edytuj</a>
+                        <a class="btn btn-danger col-12 col-md-6 mb-3" asp-action="Delete"
+                   asp-route-id="@jobOffer.Id">Usuń</a>
 
+                    </div>
+                </a>
             </div>
-            <div class="row col-12" style="max-height:30px;">
-                <a class="btn btn-primary col-12 col-md-6 mb-3" asp-action="Edit" asp-route-id="@jobOffer.Id">Edytuj</a>
-                <a class="btn btn-danger col-12 col-md-6 mb-3" asp-action="Delete" asp-route-id="@jobOffer.Id">Usuń</a>
-
-            </div>
-        </div>
-    }
-</section>
+        }
+    </section>
 }

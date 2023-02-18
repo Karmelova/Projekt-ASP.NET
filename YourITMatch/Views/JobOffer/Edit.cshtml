@@ -9,62 +9,44 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Create</h1>
-
-<h4>JobOfferModel</h4>
+<h1>Dodaj ofertę pracy</h1>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="EDIT">
+    <form asp-action="Edit">
+        <div class="row col-md-12">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group visually-hidden">
                 <label asp-for="CompanyId" class="control-label"></label>
                 <input asp-for="CompanyId" class="form-control" />
                 <span asp-validation-for="CompanyId" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="visually-hidden">
+                <label asp-for="AddedBy" class="control-label"></label>
+                <input asp-for="AddedBy" class="form-control" />
+                <span asp-validation-for="AddedBy" class="text-danger"></span>
+            </div>
+            <div class="form-group mb-3 col-12">
                 <label asp-for="Title" class="control-label"></label>
                 <input asp-for="Title" class="form-control" />
                 <span asp-validation-for="Title" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 col-12">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 col-3">
                 <label asp-for="SalaryFrom" class="control-label"></label>
                 <input asp-for="SalaryFrom" class="form-control" />
                 <span asp-validation-for="SalaryFrom" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-3 col-3">
                 <label asp-for="SalaryTo" class="control-label"></label>
                 <input asp-for="SalaryTo" class="form-control" />
                 <span asp-validation-for="SalaryTo" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="JobCategory" class="control-label"></label>
-                <select asp-for="JobCategory" class="form-control">
-                    @foreach (var value in Enum.GetValues(typeof(_JobCategory)))
-                    {
-                        var name = value.GetType()
-                        .GetMember(value.ToString())
-                        .First()
-                        .GetCustomAttribute<DisplayAttribute>()?
-                        .Name
-                        ?? value.GetType()
-                        .GetMember(value.ToString())
-                        .First()
-                        .GetCustomAttribute<DescriptionAttribute>()?
-                        .Description
-                        ?? value.ToString();
 
-                        <option value="@value">@name</option>
-                    }
-                </select>
-                <span asp-validation-for="JobCategory" class="text-danger"></span>
-            </div>
-            <div class="form-group form-check">
+            <div class="form-group form-check col-12 m-3">
                 <label class="form-check-label">
                     <input class="form-check-input" asp-for="Remote" /> @Html.DisplayNameFor(model => model.Remote)
                 </label>
@@ -72,9 +54,9 @@
             <div class="form-group row justify-content-between">
 
                 <input type="submit" value="Zapisz" class="btn btn-success col-3" />
-                <a asp-action="Index" class="text-white text-decoration-none col-2 btn btn-danger">Anuluj</a>
+                <a asp-action="JobOffersAddedByUser" class="text-white text-decoration-none col-2 btn btn-danger">Anuluj</a>
             </div>
-        </form>
-    </div>
+        </div>
+    </form>
 </div>
 

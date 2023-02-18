@@ -10,38 +10,39 @@ namespace YourITMatch.Models
         [Key]
         public int ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie nazwy firmy jest wymagane.")]
         [Display(Name = "Nazwa")]
         public string Name { get; set; }
 
         [Display(Name = "Opis")]
         public string? Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie adresu email jest wymagane.")]
         [EmailAddress]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie numeru NIP jest wymagane.")]
         [RegularExpression(@"^\d{10}$")]
         public string NIP { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie numeru regon jest wymagane.")]
         [RegularExpression(@"^\d{9}(\d{5})?$")]
         public string Regon { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie kodu pocztowego jest wymagane.")]
+        [RegularExpression(@"^\d{2}-\d{3}$", ErrorMessage = "Nieprawidłowy kod pocztowy.")]
         [Display(Name = "Kod Pocztowy")]
         public string PostCode { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie misata jest wymagane.")]
         [Display(Name = "Miasto")]
         public string City { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie nazwy województwa jest wymagane.")]
         [Display(Name = "Województwo")]
         public string Voivodeship { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie ulicy jest wymagane.")]
         [Display(Name = "Ulica")]
         public string Street { get; set; }
 

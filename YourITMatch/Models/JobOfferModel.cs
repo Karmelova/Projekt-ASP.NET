@@ -16,48 +16,23 @@ namespace YourITMatch.Models
 
         public CompanyModel? Company { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie tytułu oferty jest wymagane.")]
+        [Display(Name = "Tytuł oferty")]
         public string Title { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie opisu oferty jest wymagane.")]
+        [Display(Name = "Opis")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie wynagrodzenia jest wymagane.")]
+        [Display(Name = "Wynagrodzenie od")]
         public int SalaryFrom { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Podanie wynagrodzenia jest wymagane.")]
+        [Display(Name = "Wynagrodzenie do")]
         public int SalaryTo { get; set; }
 
-        [Required]
-        public _JobCategory JobCategory { get; set; }
-
+        [Display(Name = "Praca zdalna")]
         public bool Remote { get; set; }
-
-        public enum _JobCategory
-        {
-            JS,
-            HTML,
-            PHP,
-            RUBY,
-            PYTHON,
-            JAVA,
-            DOTNET,
-            SCALA,
-            C,
-            GO,
-            MOBILE,
-            TESTING,
-            DEVOPS,
-            ADMIN,
-            UXUI,
-            PM,
-            GAME,
-            ANALYTICS,
-            SECURITY,
-            DATA,
-            SUPPORT,
-            ARCHITECTURE,
-            OTHER,
-        }
     }
 }

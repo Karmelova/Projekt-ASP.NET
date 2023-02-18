@@ -10,7 +10,7 @@
 <section class="row">
     @foreach (var company in Model)
     {
-        <div class=" row col-12 col-md-6 p-5 mb-5">
+        <div class="card row col-12 col-md-6 p-5 mb-5">
 
             <div class="col-12">
                 <h4 class="mb-2">
@@ -29,7 +29,7 @@
                 </div>
 
             </div>
-                    <div class="row col-12" style="max-height:30px;">
+                    <div class="mb-5 row col-12" style="max-height:30px;">
                 <a class="btn btn-success col-12 mb-3" asp-controller="JobOffer" asp-action="Create" asp-route-companyId="@company.ID">Dodaj ofertę pracy</a>
                 <a class="btn btn-primary col-12 col-md-6 mb-3" asp-action="Edit" asp-route-id="@company.ID">Edytuj</a>
                 <a class="btn btn-danger col-12 col-md-6 mb-3" asp-action="Delete" asp-route-id="@company.ID">Usuń</a>

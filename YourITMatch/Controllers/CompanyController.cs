@@ -85,7 +85,7 @@ namespace YourITMatch.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ID,Name,Description,Email,NIP,Regon,PostCode,City,Voivodeship,Street,CompanySize,CompanyEstablished,CompanyWebsite")] CompanyModel companyModel)
+        public async Task<IActionResult> Edit(int id, [Bind("AddedBy,ID,Name,Description,Email,NIP,Regon,PostCode,City,Voivodeship,Street,CompanySize,CompanyEstablished,CompanyWebsite")] CompanyModel companyModel)
         {
             if (id != companyModel.ID)
             {
@@ -123,9 +123,16 @@ namespace YourITMatch.Controllers
         }
 
         //delete company
-        public ActionResult Delete(int id)
+        public async Task<ActionResult> Delete(int id)
         {
-            return View();
+            var company = await _context.Company.FindAsync(id);
+
+            if (company == null)
+            {
+                return NotFound();
+            }
+
+            return View(company);
         }
 
         [HttpPost]
@@ -150,7 +157,7 @@ namespace YourITMatch.Controllers
             _context.Company.Remove(company);
             await _context.SaveChangesAsync();
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(CompaniesAddedByUser));
         }
     }
 }
