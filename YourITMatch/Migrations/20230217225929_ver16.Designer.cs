@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using YourITMatch.Models;
 
@@ -10,12 +11,46 @@ using YourITMatch.Models;
 namespace YourITMatch.Migrations
 {
     [DbContext(typeof(YourITMatchDBContext))]
-    partial class YourITMatchDBContextModelSnapshot : ModelSnapshot
+    [Migration("20230217225929_ver16")]
+    partial class ver16
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.1");
+
+            modelBuilder.Entity("YourITMatch.Models.CompanyAddressModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("CompanyIDID")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PostCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Voivodeship")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("CompanyIDID");
+
+                    b.ToTable("CompanyAddress");
+                });
 
             modelBuilder.Entity("YourITMatch.Models.CompanyModel", b =>
                 {
@@ -75,6 +110,38 @@ namespace YourITMatch.Migrations
                     b.ToTable("Company");
                 });
 
+            modelBuilder.Entity("YourITMatch.Models.JobOfferLocalisationModel", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("JobOfferIdId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("PostCode")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Street")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Voivodeship")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("JobOfferIdId");
+
+                    b.ToTable("JobOfferLocalisation");
+                });
+
             modelBuilder.Entity("YourITMatch.Models.JobOfferModel", b =>
                 {
                     b.Property<int>("Id")
@@ -85,6 +152,9 @@ namespace YourITMatch.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<int>("CompanyId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CompanyModelID")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Description")
@@ -109,20 +179,38 @@ namespace YourITMatch.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CompanyId");
+                    b.HasIndex("CompanyModelID");
 
                     b.ToTable("JobOffer");
                 });
 
-            modelBuilder.Entity("YourITMatch.Models.JobOfferModel", b =>
+            modelBuilder.Entity("YourITMatch.Models.CompanyAddressModel", b =>
                 {
-                    b.HasOne("YourITMatch.Models.CompanyModel", "Company")
-                        .WithMany("JobOffers")
-                        .HasForeignKey("CompanyId")
+                    b.HasOne("YourITMatch.Models.CompanyModel", "CompanyID")
+                        .WithMany()
+                        .HasForeignKey("CompanyIDID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Company");
+                    b.Navigation("CompanyID");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.JobOfferLocalisationModel", b =>
+                {
+                    b.HasOne("YourITMatch.Models.JobOfferModel", "JobOfferId")
+                        .WithMany()
+                        .HasForeignKey("JobOfferIdId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("JobOfferId");
+                });
+
+            modelBuilder.Entity("YourITMatch.Models.JobOfferModel", b =>
+                {
+                    b.HasOne("YourITMatch.Models.CompanyModel", null)
+                        .WithMany("JobOffers")
+                        .HasForeignKey("CompanyModelID");
                 });
 
             modelBuilder.Entity("YourITMatch.Models.CompanyModel", b =>

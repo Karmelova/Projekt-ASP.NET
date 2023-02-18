@@ -38,7 +38,12 @@ namespace YourITMatch.Controllers
         // GET: HomeController1/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var company = _context.Company.FirstOrDefault(j => j.ID == id);
+            if (company == null)
+            {
+                return NotFound();
+            }
+            return View(company);
         }
 
         // GET: HomeController1/Create
@@ -59,7 +64,7 @@ namespace YourITMatch.Controllers
 
                 _context.Add(companyModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CompaniesAddedByUser));
             }
 
             return View(companyModel);
@@ -106,7 +111,7 @@ namespace YourITMatch.Controllers
                     }
                 }
 
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(CompaniesAddedByUser));
             }
 
             return View(companyModel);
@@ -127,11 +132,19 @@ namespace YourITMatch.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
-            var company = await _context.Company.FindAsync(id);
+            var company = await _context.Company
+                .Include(c => c.JobOffers)
+                .FirstOrDefaultAsync(m => m.ID == id);
 
             if (company == null)
             {
                 return NotFound();
+            }
+
+            // usuwanie ofert pracy powiązanych z firmą
+            foreach (var jobOffer in company.JobOffers)
+            {
+                _context.JobOffer.Remove(jobOffer);
             }
 
             _context.Company.Remove(company);

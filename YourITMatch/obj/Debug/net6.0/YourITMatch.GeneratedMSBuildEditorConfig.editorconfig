@@ -120,8 +120,24 @@ build_metadata.AdditionalFiles.CssScope =
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJcQ3JlYXRlLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
+[C:/Users/kamil/source/repos/Projekt-ASP.NET/YourITMatch/Views/JobOffer/Delete.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJcRGVsZXRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kamil/source/repos/Projekt-ASP.NET/YourITMatch/Views/JobOffer/Details.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJcRGV0YWlscy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kamil/source/repos/Projekt-ASP.NET/YourITMatch/Views/JobOffer/Edit.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJcRWRpdC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
 [C:/Users/kamil/source/repos/Projekt-ASP.NET/YourITMatch/Views/JobOffer/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJcSW5kZXguY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[C:/Users/kamil/source/repos/Projekt-ASP.NET/YourITMatch/Views/JobOffer/JobOffersAddedByUser.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSm9iT2ZmZXJcSm9iT2ZmZXJzQWRkZWRCeVVzZXIuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/kamil/source/repos/Projekt-ASP.NET/YourITMatch/Views/Shared/Error.cshtml]

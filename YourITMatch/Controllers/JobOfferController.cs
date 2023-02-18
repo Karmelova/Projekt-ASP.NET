@@ -1,6 +1,10 @@
 ﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using System.ComponentModel.Design;
+using System.Linq;
+using YourITMatch.Areas.Identity.Data;
 using YourITMatch.Models;
 
 namespace YourITMatch.Controllers
@@ -8,10 +12,20 @@ namespace YourITMatch.Controllers
     public class JobOfferController : Controller
     {
         private readonly YourITMatchDBContext _context;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public JobOfferController(YourITMatchDBContext context)
+        public JobOfferController(YourITMatchDBContext context, UserManager<ApplicationUser> userManager)
         {
             _context = context;
+            _userManager = userManager;
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> JobOffersAddedByUser(string userName)
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            var jobOffers = _context.JobOffer.Where(c => c.AddedBy == currentUser.UserName).ToList();
+            return View(jobOffers);
         }
 
         public ActionResult Index()
@@ -20,8 +34,18 @@ namespace YourITMatch.Controllers
             return View(jobOffers);
         }
 
+        public ActionResult Details(int id)
+        {
+            var jobOffer = _context.JobOffer.FirstOrDefault(j => j.Id == id);
+            if (jobOffer == null)
+            {
+                return NotFound();
+            }
+            return View(jobOffer);
+        }
+
         // GET: HomeController1/Create
-        public IActionResult Create(int companyId)
+        public async Task<IActionResult> Create(int companyId)
         {
             var jobOffer = new JobOfferModel { CompanyId = companyId };
             return View(jobOffer);
@@ -30,10 +54,13 @@ namespace YourITMatch.Controllers
         // POST: HomeController1/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,CompanyID,Title,Description,SalaryFrom,SalaryTo,DateAdded,JobCategoryId,Remote")] JobOfferModel jobOfferModel)
+        public async Task<IActionResult> Create([Bind("Id,CompanyId,Title,Description,SalaryFrom,SalaryTo,JobCategoryId,Remote")] JobOfferModel jobOfferModel)
         {
             if (ModelState.IsValid)
             {
+                var company = await _context.Company.FindAsync(jobOfferModel.CompanyId);
+                var currentUser = await _userManager.GetUserAsync(User);
+                jobOfferModel.AddedBy = currentUser.UserName;
                 _context.Add(jobOfferModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -41,46 +68,77 @@ namespace YourITMatch.Controllers
             return View(jobOfferModel);
         }
 
-        // GET: HomeController1/Edit/5
-        public ActionResult Edit(int id)
+        public async Task<IActionResult> Edit(int id)
         {
-            return View();
+            var jobOffer = await _context.JobOffer.FindAsync(id);
+
+            if (jobOffer == null)
+            {
+                return NotFound();
+            }
+
+            return View(jobOffer);
         }
 
-        // POST: HomeController1/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,CompanyId,Company,Title,Description,SalaryFrom,SalaryTo,JobCategoryId,Remote")] JobOfferModel jobOfferModel)
         {
-            try
+            if (id != jobOfferModel.Id)
             {
+                return NotFound();
+            }
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    _context.Update(jobOfferModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (DbUpdateConcurrencyException)
+                {
+                    if (!jobOfferExists(jobOfferModel.Id))
+                    {
+                        return NotFound();
+                    }
+                    else
+                    {
+                        throw;
+                    }
+                }
+
                 return RedirectToAction(nameof(Index));
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(jobOfferModel);
         }
 
-        // GET: HomeController1/Delete/5
+        private bool jobOfferExists(int id)
+        {
+            return _context.JobOffer.Any(e => e.Id == id);
+        }
+
         public ActionResult Delete(int id)
         {
             return View();
         }
 
-        // POST: HomeController1/Delete/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Delete(int id, IFormCollection collection)
+        public async Task<ActionResult> Delete(int id, IFormCollection collection)
         {
-            try
+            var jobOffer = await _context.JobOffer.FindAsync(id);
+
+            if (jobOffer == null)
             {
-                return RedirectToAction(nameof(Index));
+                return NotFound();
             }
-            catch
-            {
-                return View();
-            }
+
+            _context.JobOffer.Remove(jobOffer);
+            await _context.SaveChangesAsync();
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

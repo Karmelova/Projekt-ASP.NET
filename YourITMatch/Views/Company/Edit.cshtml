@@ -1,92 +1,115 @@
-﻿@model YourITMatch.Models.CompanyModel
+﻿@using System.Reflection;
+@using System.ComponentModel.DataAnnotations;
+@using System.ComponentModel;
+@using static YourITMatch.Models.CompanyModel;
+@model YourITMatch.Models.CompanyModel
 
 @{
     ViewData["Title"] = "Edit";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h1>Edit</h1>
+<h1>Edytuj dane o firmie</h1>
 
-<h4>CompanyModel</h4>
 <hr />
 <div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="AddedBy" class="control-label"></label>
-                <input asp-for="AddedBy" class="form-control" />
-                <span asp-validation-for="AddedBy" class="text-danger"></span>
-            </div>
-            <input type="hidden" asp-for="ID" />
-            <div class="form-group">
+
+    <form asp-action="Edit">
+        <div class="row col-12">
+            <h4>Dane podstawowe</h4>
+            <div class="form-group col-12 col-md-6 mb-3">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="form-group">
+            <div class="row form-group col-12 col-md-6 mb-3">
+                <div class="form-group col-6 mb-3">
+                    <label asp-for="NIP" class="control-label"></label>
+                    <input asp-for="NIP" class="form-control" />
+                    <span asp-validation-for="NIP" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 mb-3">
+                    <label asp-for="Regon" class="control-label"></label>
+                    <input asp-for="Regon" class="form-control" />
+                    <span asp-validation-for="Regon" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group col-12 mb-3">
                 <label asp-for="Description" class="control-label"></label>
                 <input asp-for="Description" class="form-control" />
                 <span asp-validation-for="Description" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="NIP" class="control-label"></label>
-                <input asp-for="NIP" class="form-control" />
-                <span asp-validation-for="NIP" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Regon" class="control-label"></label>
-                <input asp-for="Regon" class="form-control" />
-                <span asp-validation-for="Regon" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="PostCode" class="control-label"></label>
-                <input asp-for="PostCode" class="form-control" />
-                <span asp-validation-for="PostCode" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="City" class="control-label"></label>
-                <input asp-for="City" class="form-control" />
-                <span asp-validation-for="City" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Voivodeship" class="control-label"></label>
-                <input asp-for="Voivodeship" class="form-control" />
-                <span asp-validation-for="Voivodeship" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Street" class="control-label"></label>
-                <input asp-for="Street" class="form-control" />
-                <span asp-validation-for="Street" class="text-danger"></span>
-            </div>
-            <div class="form-group">
+            <div class="form-group col-3 mb-3">
                 <label asp-for="CompanySize" class="control-label"></label>
-                <input asp-for="CompanySize" class="form-control" />
-                <span asp-validation-for="CompanySize" class="text-danger"></span>
+                <select asp-for="CompanySize" class="form-control">
+                    @foreach (var value in Enum.GetValues(typeof(_CompanySize)))
+                    {
+                        var name = value.GetType()
+                        .GetMember(value.ToString())
+                        .First()
+                        .GetCustomAttribute<DisplayAttribute>()?
+                        .Name
+                        ?? value.GetType()
+                        .GetMember(value.ToString())
+                        .First()
+                        .GetCustomAttribute<DescriptionAttribute>()?
+                        .Description
+                        ?? value.ToString();
+
+                        <option value="@value">@name</option>
+                    }
+                </select>
             </div>
-            <div class="form-group">
+            <div class="form-group col-4 col-md-3 mb-3">
                 <label asp-for="CompanyEstablished" class="control-label"></label>
                 <input asp-for="CompanyEstablished" class="form-control" />
                 <span asp-validation-for="CompanyEstablished" class="text-danger"></span>
             </div>
-            <div class="form-group">
-                <label asp-for="CompanyWebsite" class="control-label"></label>
-                <input asp-for="CompanyWebsite" class="form-control" />
-                <span asp-validation-for="CompanyWebsite" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+        </div>
 
-<div>
-    <a asp-action="Index">Back to List</a>
+        <div class="row col-12">
+            <h4>Dane kontaktowe</h4>
+            <div class="form-group col-md-6 col-12 mb-3">
+                <div class="form-group col-12 mb-3">
+                    <label asp-for="Email" class="control-label"></label>
+                    <input asp-for="Email" class="form-control" />
+                    <span asp-validation-for="Email" class="text-danger"></span>
+                </div>
+                <div class="form-group col-12 mb-3">
+                    <label asp-for="CompanyWebsite" class="control-label"></label>
+                    <input asp-for="CompanyWebsite" class="form-control" />
+                    <span asp-validation-for="CompanyWebsite" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="row form-group col-md-6 col-12 mb-3">
+                <div class="form-group col-6 mb-3">
+                    <label asp-for="Voivodeship" class="control-label"></label>
+                    <input asp-for="Voivodeship" class="form-control" />
+                    <span asp-validation-for="Voivodeship" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 mb-3">
+                    <label asp-for="City" class="control-label"></label>
+                    <input asp-for="City" class="form-control" />
+                    <span asp-validation-for="City" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 mb-3">
+                    <label asp-for="PostCode" class="control-label"></label>
+                    <input asp-for="PostCode" class="form-control" />
+                    <span asp-validation-for="PostCode" class="text-danger"></span>
+                </div>
+                <div class="form-group col-6 mb-3">
+                    <label asp-for="Street" class="control-label"></label>
+                    <input asp-for="Street" class="form-control" />
+                    <span asp-validation-for="Street" class="text-danger"></span>
+                </div>
+            </div>
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group row justify-content-between">
+
+                <input type="submit" value="Zapisz" class="btn btn-success col-3" />
+                <a asp-action="CompaniesAddedByUser" class="text-white text-decoration-none col-2 btn btn-danger">Anuluj</a>
+            </div>
+        </div>
+    </form>
 </div>
 

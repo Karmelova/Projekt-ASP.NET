@@ -5,12 +5,16 @@ namespace YourITMatch.Models
 {
     public class JobOfferModel
     {
+        public string? AddedBy { get; set; }
+
         [Required]
         [Key]
         public int Id { get; set; }
 
         [Required]
         public int CompanyId { get; set; }
+
+        public CompanyModel? Company { get; set; }
 
         [Required]
         public string Title { get; set; }
@@ -19,10 +23,10 @@ namespace YourITMatch.Models
         public string Description { get; set; }
 
         [Required]
-        public decimal SalaryFrom { get; set; }
+        public int SalaryFrom { get; set; }
 
         [Required]
-        public decimal SalaryTo { get; set; }
+        public int SalaryTo { get; set; }
 
         [Required]
         public _JobCategory JobCategory { get; set; }
